@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public abstract class BasePage {
 
@@ -35,6 +36,19 @@ public abstract class BasePage {
     public boolean isElementDisplayed(WebElement element) {
         try {
             return element.isDisplayed();
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            return false;
+        }
+    }
+
+    public boolean areElementsDisplayed(List<WebElement> elements) {
+        try {
+            for (WebElement element : elements) {
+                if (!element.isDisplayed()) {
+                    return false;
+                }
+            }
+            return true;
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
