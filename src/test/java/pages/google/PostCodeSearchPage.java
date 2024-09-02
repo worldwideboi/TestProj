@@ -1,5 +1,6 @@
 package pages.google;
 
+import helpers.DataStorage;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +12,7 @@ public class PostCodeSearchPage extends BasePage {
     public PostCodeSearchPage(){
         PageFactory.initElements(driver, this);
     }
+    DataStorage dataStorage = new DataStorage();
 
     @FindBy(id = "consent_prompt_submit")
     private WebElement acceptCookiesButton;

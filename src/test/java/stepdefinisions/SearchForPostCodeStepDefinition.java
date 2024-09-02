@@ -26,8 +26,8 @@ public class SearchForPostCodeStepDefinition {
     }
 
     @When("User enter {string} in the postcode search field")
-    public void user_enter_in_the_post_code_search_field(String arg0) {
-        postCodeSearchPage.searchForPostCodeQuery(arg0);
+    public void userEnterInThePostcodeSearchField(String country) {
+        postCodeSearchPage.searchForPostCodeQuery(country);
     }
 
     @Then("User able to see the list of results")

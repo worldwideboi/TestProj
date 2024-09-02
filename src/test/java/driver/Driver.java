@@ -7,27 +7,24 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Driver {
 
-    public static WebDriver driver;
+    private static final InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
     public static WebDriver getInstance() {
-        if (driver == null) {
+        if (driverPool.get() == null) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-search-engine-choice-screen");
             options.addArguments("--disable-popup-blocking");
-            driver = new ChromeDriver(options);
-            driver.manage().window().maximize();
-            driver.manage().deleteAllCookies();
+            driverPool.set(new ChromeDriver(options));
         }
-        return driver;
+        return driverPool.get();
     }
 
     public static void quit() {
-        if (driver != null) {
-            driver.close();
-            driver.quit();
-            driver = null;
+        if (driverPool.get() != null) {
+            driverPool.get().quit();
+            driverPool.remove();
         }
     }
 }

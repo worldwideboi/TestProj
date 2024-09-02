@@ -1,13 +1,17 @@
 package pages.google;
 
+import helpers.PropertyReader;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
 
+import java.util.Properties;
+
 public class GooglePage extends BasePage {
     private static final String url = "https://www.google.com/";
+
     public GooglePage() {
         PageFactory.initElements(driver, this);
     }
